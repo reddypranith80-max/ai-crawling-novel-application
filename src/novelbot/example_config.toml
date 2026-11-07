@@ -1,0 +1,76 @@
+# novelbot configuration
+#
+# Every key is optional; the values shown are the defaults.
+# Locations searched (first found wins):
+#   --config PATH  >  $NOVELBOT_CONFIG  >  ./novelbot.toml  >  user config
+# Run `novelbot config path` to see where your user config lives.
+
+[download]
+output_dir = "Novels"          # relative paths are relative to this file
+concurrency = 3                # parallel chapter downloads (1-32)
+formats = ["epub"]             # any of: epub, pdf, txt, json
+download_images = true         # embed chapter images in the books
+keep_author_notes = false
+
+[http]
+delay = 1.5                    # min seconds between requests to the same site
+jitter = 0.5                   # + random 0..jitter seconds
+timeout = 30
+retries = 4                    # for network errors, 429 and 5xx
+backoff = 2.0                  # exponential backoff base (seconds)
+respect_robots = true          # obey robots.txt (strongly recommended)
+verify_ssl = true
+# proxy = "http://127.0.0.1:8080"
+# user_agent = "Mozilla/5.0 (compatible; novelbot/0.1; personal offline reader)"
+
+# [http.headers]
+# Accept-Language = "en-GB,en;q=0.8"
+
+[epub]
+include_cover = true
+include_info_page = true
+# Novels without volumes get their contents grouped into blocks of this many
+# chapters ("Chapters 1-100", ...). Keeps 1000+ chapter books navigable.
+toc_group_size = 100
+# stylesheet = "my-style.css"
+
+[pdf]
+page_size = "A5"               # A4, A5, A6, Letter, Legal
+font_size = 11
+include_images = true
+# Fonts are auto-detected (Georgia / DejaVu Serif / Liberation Serif).
+# font = "C:/Windows/Fonts/georgia.ttf"
+# font_bold = "C:/Windows/Fonts/georgiab.ttf"
+# font_italic = "C:/Windows/Fonts/georgiai.ttf"
+# font_bold_italic = "C:/Windows/Fonts/georgiaz.ttf"
+# For Chinese/Japanese/Korean text add a CJK font as a fallback:
+# fallback_fonts = ["C:/Windows/Fonts/msyh.ttc"]
+
+# Extra folders with *.py crawler plugins (classes subclassing BaseCrawler).
+# plugin_dirs = ["~/novelbot-sources"]
+
+# log_file = "novelbot.log"
+
+# ---------------------------------------------------------------------------
+# Generic sites: teach novelbot a new site with CSS selectors, no Python.
+# Use it with: novelbot crawl https://www.example-novels.com/novel/my-novel/
+# ---------------------------------------------------------------------------
+# [sites.example]
+# hosts = ["www.example-novels.com", "example-novels.com"]
+# title = "h1.novel-title"
+# author = ".author a"
+# cover = ".novel-cover img"          # an <img> (src/data-src) or a <meta>
+# synopsis = ".summary"
+# tags = ".genres a"
+# chapter_list = "ul.chapter-list li a"   # the chapter <a> links on the index page
+# toc_next = "a.next-page"                # if the chapter index has several pages
+# reverse_chapters = false                # true if the index lists newest first
+# content = "div.chapter-content"
+# chapter_title = "h1.chapter-title"
+# remove = [".ads", ".share-buttons"]
+# bad_text = ["Read the latest chapters at"]
+# delay = 2.0
+#
+# No chapter index on the site? Leave out chapter_list, give the URL of
+# chapter 1, and tell novelbot how to find the "next chapter" link:
+# next_chapter = "a.next-chapter"
