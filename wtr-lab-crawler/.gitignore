@@ -1,0 +1,40 @@
+# Secrets
+.env
+.env.*
+*.zip
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Local runtime data (never upload)
+data/
+*.sqlite3
+*.sqlite3-*
+
+# Chrome / Selenium
+**/chrome-profile/
+**/SingletonLock
+**/SingletonCookie
+**/SingletonSocket
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.idea/
+.vscode/
+downloaded_files/
+# Build / temp
+*.tmp
+*.epub.tmp
+dist/
+build/"downloaded_files/" 
+build/"DB.Browser.for.SQLite-v3.13.1-win64/"
+DB.Browser.for.SQLite-v3.13.1-win64.zip
